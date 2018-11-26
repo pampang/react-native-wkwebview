@@ -1,5 +1,9 @@
 ## WKWebView Component for React Native
 
+如果 webview 已经启动，如果 cookie 在客户端被更改了，已经存在的 webview 是无法知道这个事情的，对应的 cookie 还依然是旧值。
+
+当 webview 被重新打开时，cookie 会恢复到正确的位置。
+
 [![npm version](https://badge.fury.io/js/react-native-wkwebview-reborn.svg)](https://badge.fury.io/js/react-native-wkwebview-reborn)
 
 React Native comes with [WebView](http://facebook.github.io/react-native/docs/webview.html) component, which uses UIWebView on iOS. This component uses [WKWebView](http://nshipster.com/wkwebkit/) introduced in iOS 8 with all the performance boost.
