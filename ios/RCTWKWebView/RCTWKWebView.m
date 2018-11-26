@@ -481,6 +481,25 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     }
   }
 
+  // 处理 itunes 跳转 by PAMPANG
+  NSString *urlString = (url) ? url.absoluteString : @"";
+  // iTunes: App Store link
+  // 例如，微信的下载链接: https://itunes.apple.com/cn/app/id414478124?mt=8
+  if ([urlString containsString:@"//itunes.apple.com/"]) {
+    if ([app canOpenURL:url]) {
+      [app openURL:url];
+      decisionHandler(WKNavigationActionPolicyCancel);
+      return;
+    }
+  } else if (url.scheme && ![url.scheme hasPrefix:@"http"]) {
+    // Protocol/URL-Scheme without http(s)
+    if ([app canOpenURL:url]) {
+      [app openURL:url];
+      decisionHandler(WKNavigationActionPolicyCancel);
+      return;
+    }
+  }
+
   // skip this for the JS Navigation handler
   if (!isJSNavigation && _onShouldStartLoadWithRequest) {
     NSMutableDictionary<NSString *, id> *event = [self baseEvent];
