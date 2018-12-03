@@ -481,7 +481,10 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     }
   }
 
-  // 处理 itunes 跳转 by PAMPANG
+  /**
+   * 识别外部链接并自动跳转 by PAMPANG
+   * 条件：//itunes.apple.com/ 或者 itms-services://
+   */
   NSString *urlString = (url) ? url.absoluteString : @"";
   // iTunes: App Store link
   // 例如，微信的下载链接: https://itunes.apple.com/cn/app/id414478124?mt=8
@@ -491,8 +494,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
       decisionHandler(WKNavigationActionPolicyCancel);
       return;
     }
-  } else if (url.scheme && ![url.scheme hasPrefix:@"http"]) {
-    // Protocol/URL-Scheme without http(s)
+  } else if (url.scheme && [url.scheme hasPrefix:@"itms-services"]) {
+    // Protocol/URL-Scheme with itms-services
     if ([app canOpenURL:url]) {
       [app openURL:url];
       decisionHandler(WKNavigationActionPolicyCancel);
