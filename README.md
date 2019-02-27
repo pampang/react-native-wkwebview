@@ -1,3 +1,16 @@
+## 版本映射情况
+
+| 本仓库版本 | 元仓库版本 |
+| ------ | ------ |
+| 2.0.0 | 2.0.0 |
+
+## new feature added by pampang
+
+1. 自动识别外部链接并自动跳转，条件：//itunes.apple.com/ 或者 itms-services://
+2. webview loading 去掉背景，让其可以被穿透点击，实现让 webview 可以在页面还没完全加载完的时候，也能展示内容
+3. wkwebview 下因为内存暴涨而导致的页面崩溃，使用 onWebViewDidTerminate
+4. fix reload problem after network connection failed
+
 ## WKWebView Component for React Native
 
 如果 webview 已经启动，如果 cookie 在客户端被更改了，已经存在的 webview 是无法知道这个事情的，对应的 cookie 还依然是旧值。
