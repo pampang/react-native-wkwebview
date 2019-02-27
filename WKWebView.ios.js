@@ -290,11 +290,23 @@ class WKWebView extends React.Component {
     }
   }
 
+  // 因为renderLoading的时候不隐藏webview，为了支持loadingView能在webview上叠加显示，所以最外包一层绝对布局的view by PAMPANG
+  getLoadingContainer(otherView) {
+    // 使用 pointerEvents=“none” 实现点击穿透 by PAMPANG
+    return (
+      <View style={styles.loadingContainer}  pointerEvents="none">
+        {otherView}
+      </View>
+    );
+  }
+
   render() {
     let otherView = null;
 
     if (this.state.viewState === WebViewState.LOADING) {
       otherView = (this.props.renderLoading || defaultRenderLoading)();
+      //将loadingView在webview上叠加显示 by PAMPANG
+      otherView = this.getLoadingContainer(otherView);
     } else if (this.state.viewState === WebViewState.ERROR) {
       const errorEvent = this.state.lastErrorEvent;
       invariant(
@@ -313,8 +325,9 @@ class WKWebView extends React.Component {
     }
 
     const webViewStyles = [styles.container, styles.webView, this.props.style];
-    if (this.state.viewState === WebViewState.LOADING ||
-      this.state.viewState === WebViewState.ERROR) {
+    // 不在 LOADING 状态隐藏 webview by PAMPANG
+    // if (this.state.viewState === WebViewState.LOADING || this.state.viewState === WebViewState.ERROR) {
+    if (this.state.viewState === WebViewState.ERROR) {
       // if we're in either LOADING or ERROR states, don't show the webView
       webViewStyles.push(styles.hidden);
     }
@@ -570,6 +583,13 @@ const styles = StyleSheet.create({
   hidden: {
     height: 0,
     flex: 0, // disable 'flex:1' when hiding a View
+  },
+  loadingContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom:0,
   },
   loadingView: {
     backgroundColor: BGWASH,
