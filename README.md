@@ -11,6 +11,22 @@
 3. wkwebview 下因为内存暴涨而导致的页面崩溃，使用 onWebViewDidTerminate
 4. fix reload problem after network connection failed
 
+## usage
+
+in `ios/Podfile`:
+
+```
+pod 'react-native-wkwebview', :path => '../node_modules/react-native-wkwebview-shefenqi'
+```
+
+### react-antive
+
+in `package.json`:
+
+```
+"react-native-wkwebview-shefenqi": "2.0.0",
+```
+
 ## WKWebView Component for React Native
 
 如果 webview 已经启动，如果 cookie 在客户端被更改了，已经存在的 webview 是无法知道这个事情的，对应的 cookie 还依然是旧值。
