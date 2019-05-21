@@ -1,6 +1,6 @@
 {
   "name": "react-native-wkwebview-shefenqi",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Fork from github.com/CRAlpha/react-native-wkwebview. Make it suitable for shefenqi",
   "main": "index.js",
   "scripts": {

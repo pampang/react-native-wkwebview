@@ -2,7 +2,7 @@
 
 | 本仓库版本 | 元仓库版本 |
 | ------ | ------ |
-| 2.0.0-shefenqi | 2.0.0 |
+| 2.0.1-shefenqi | 2.0.0 |
 
 ## new feature added by pampang
 
